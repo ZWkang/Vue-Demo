@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件之refs</title>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<parent-component></parent-component>
+	</div>
+	<template id="parent-component">
+		<child-component1 v-ref:cc1></child-component1>
+		<child-component2 v-ref:cc2></child-component2>
+		<button v-on:click="showChildComponentData"></button>
+	</template>
+	<template id="child-component1">
+		<h1>hello I'm child-component1</h1>
+	</template>
+	<template id="child-component2">
+		<h1>hello I'm child-component2</h1>
+	</template>
+
+	<script>
+		Vue.component(
+			'parent-component',{
+				template:'#parent-component',
+				components:{
+					'child-component1':{
+						template:'#child-component1',
+						data:function(){
+							return {msg:'hahahah'};
+						}
+					},
+					'child-component2':{
+						template:'#child-component2'
+					}
+
+				},
+				methods:{
+					showChildComponentData:function(){
+						alert(this.$refs.cc1.msg);
+					}
+				}
+
+			}
+		)
+		new Vue({
+			el:'#app'
+		})
+	</script>
+</body>
+</html>

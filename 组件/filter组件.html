@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搜索过滤</title>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div id="searchBar">
+			Search <input type="text" v-model="searchquery" />
+		</div>
+		<my-grid v-bind:data="gridDate" v-bind:colums="gridcolums" v-bind:filter-Key="searchquery"></my-grid>
+	</div>
+	<template id="mygrid">
+		<table>
+			<thead>
+				<tr>
+					<th v-for="col in colums">
+						{{ col | capitalize }}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="entry in data | filterBy filterKey">
+			                        <td v-for="col in colums">
+			                            	{{entry[col]}}
+			                        </td>
+				</tr>
+			</tbody>
+		</table>
+	</template>
+<script>
+Vue.component(
+	'my-grid',{
+		template:'#mygrid',
+		props:{
+			data:Array,
+			colums:Array,
+			filterKey:String
+		}
+	}
+)
+var uuu = new Vue({
+	el:'#app',
+	data:{
+		searchquery:'',
+		gridcolums:['name','age','sex'],
+		gridDate:[
+		{
+			name:'kang',age:12,sex:'Male'
+		},{
+			name:'John',age:22,sex:'Male'
+		},{
+			name:'leesa',age:33,sex:'women'
+		},{
+			name:'win',age:22,sex:'Male'
+		}]
+	}
+})
+</script>
+</body>
+</html>

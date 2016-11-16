@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<h1>插值</h1>
+	<h2>文本</h2>
+	<div id="div-main">
+	<span>{{msg}}</span><br>
+	<span>This will never change: {{* msg }}</span>
+	</div>
+	<p>Mustache 标签会被相应数据对象的 msg 属性的值替换。每当这个属性变化时它也会更新。</p>
+	<p>你也可以只处理单次插值，今后的数据变化就不会再引起插值更新了：</p>
+	<code><span>This will never change: {{* msg }}</span></code>
+
+<script src="../vue.js"></script>
+<script>
+	var vue = new Vue({
+		el:'#div-main',
+		data:{msg:'helloworld'}
+	});
+</script>
+</body>
+</html>

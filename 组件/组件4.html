@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>zujian demo4</title>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-component></my-component>
+	</div>
+	<template id="mycomplate">
+		<div>test is complate </div>
+	</template>
+	<script>
+	Vue.component('my-component',{
+		template:'#mycomplate'
+	})
+	new Vue({
+		el:'#app'
+	})
+
+	</script>
+</body>
+</html>

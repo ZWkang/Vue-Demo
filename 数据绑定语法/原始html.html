@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+	<h1>插值</h1>
+	<h2>原始hml</h2>
+	<div id="div-main">
+	<span>{{msg}}</span><br>
+	</div>
+
+<script src="../vue.js"></script>
+<script>
+	var vue = new Vue({
+		el:'#div-main',
+		data:{msg:'<div>hello</div>'}
+	});
+	
+</script>
+</body>
+</html>

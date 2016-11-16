@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script src="./vue.js"></script>
+	<style>
+		.block{
+			background-color: red;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+		}
+		li>dl{
+			display: inline-block;
+		}
+	</style>
+</head>
+<body>
+	<div id="nmd">
+		<form action="###" v-on:submit.prevent="addtodo">
+			日期：<input type="text" v-model="name" value="{{name}}">
+			DoWHAT：<input type="text" v-model="description">
+			<input type="submit">
+		</form>
+		<ol>
+			<li v-for="t in todos">
+				<dl>
+					<dt>{{t.name}}</dt>
+					<dt>{{t.description}}</dt>
+					<dt></dt>
+				</dl>
+				<span class="block"  v-on:click="del($index)"></span>
+			</li>
+		</ol>
+	</div>
+	<div id="test">
+		
+	</div>
+	<script>
+	$(function () {
+	    function message(names,descriptions){
+	    	var a = {}
+		a.name='日期：'+names;
+		a.description='DO：'+descriptions;
+	    	return a;
+	    }
+	    var forin = new Vue({
+	    	el:"#nmd",
+	    	data:{
+	    		name:'',
+	    		description:'',
+			todos: [
+			    {
+			        name: '产品评审',
+			        description: '新款iPhone上市前评审'
+			    },
+			    {
+			        name: '开发计划',
+			        description: '与PM确定下一版Android开发计划'
+			    },
+			    {
+			        name: 'VC会议',
+			        description: '敲定C轮5000万美元融资'
+			    }
+			]
+	    	},
+	    	methods:{
+	    		addtodo:function(){
+				forin.todos.push(message(this.name,this.description));
+				this.name='';
+				this.description='';
+	    		},
+	    		del:function(test){
+	    			forin.todos.splice(test,1);
+	    		}
+	    	}
+	    });
+	    window.forin=forin;
+	});
+
+	</script>
+</body>
+</html>

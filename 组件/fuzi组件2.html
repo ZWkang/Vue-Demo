@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件之间的访问2</title>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<parent-component></parent-component>
+	</div>
+	<template id="parent-component">
+		<child-component1></child-component1>
+	</template>
+	<template id="child-component1">
+		<h2>This is child component 1</h2>
+		<button v-on:click="ShowMsg">显示父组件的数据</button>
+	</template>
+
+	<script>
+		Vue.component('parent-component',{
+			template:'#parent-component',
+			components:{
+				'child-component1':{
+					template:'#child-component1',
+					methods:{
+						ShowMsg:function(){
+							alert(this.$parent.msg)
+						}
+					}
+				}
+			},
+			data:function(){
+				return {msg:'parent component message'}
+			}
+
+		})
+		new Vue({
+			el:"#app"
+		})
+	</script>
+</body>
+</html>

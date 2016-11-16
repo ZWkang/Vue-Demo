@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义事件</title>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<p>Message：{{  messages | json }}</p>
+		<child-component></child-component>
+	</div>
+	<template id="child-component">
+		<input type="text" v-model="msg">
+		<button v-on:click="notify">Dispatch Event</button>
+	</template>	
+	<script>
+		Vue.component('child-component',{
+			template:'#child-component',
+			data:function(){
+				return{
+					msg:''
+				}
+			},
+			methods:{
+				notify:function(){
+					if(this.msg.trim()){
+						this.$dispatch('child-msg',this.msg)
+						this.msg=''
+					}
+				}
+			}
+		})
+		new Vue({
+			el:'#app',
+			data:{
+				messages:[]
+			},
+			events:{
+				'child-msg':function(msg){
+					this.messages.push(msg)
+				}
+			}
+		})
+
+
+	</script>
+</body>
+</html>

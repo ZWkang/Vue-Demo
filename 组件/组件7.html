@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父组件与子组件数据双向绑定</title>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+	<script src="./vue.js"></script>
+</head>
+<body>
+<template id="mytemplates">
+	<table>
+		<tr>
+			<td colspan="3">子组件数据</td>
+		</tr>
+		<tr>
+			<td>name</td>
+			<td>{{ names }}</td>
+			<td><input type="text" v-model="names"></td>
+		</tr>
+		<tr>
+			<td>age</td>
+			<td>{{ ages }}</td>
+			<td><input type="text" v-model="ages"></td>
+		</tr>
+	</table>
+</template>
+
+<div id="app">
+	<my-complate  v-bind:names.sync="name"  v-bind:ages.sync="age"></my-complate>
+	<table>
+		<tr>
+			<td colspan="3">父组件数据</td>
+		</tr>
+		<tr>
+			<td>name</td>
+			<td>{{ name }}</td>
+			<td><input type="text" v-model="name"></td>
+		</tr>
+		<tr>
+			<td>age</td>
+			<td>{{ age }}</td>
+			<td><input type="text" v-model="age"></td>
+		</tr>
+	</table>
+	
+</div>
+<script>
+	var a = new Vue({
+		el:'#app',
+		data:{
+			name:'kang',
+			age:21
+		},
+		components:{
+			'my-complate':{
+				template:'#mytemplates',
+				props:['names','ages']
+			}
+		}
+	})
+
+</script>
+</body>
+</html>
